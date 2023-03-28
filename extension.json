@@ -1,0 +1,9 @@
+{
+"name": "Repldb Export and Import",
+  "description": "Repldb exporter and importer.",
+  "version": "0",
+  "tags": ["utility", "database"],
+  "supportEmail": "zavexeon@pm.me",
+  "website": "https://zavexeon.github.io",
+  "longDescription": "Export your Repldb as a JSON file or import a Repldb from a JSON file."
+}

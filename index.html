@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>repldb import and export</title>
+    <link href="style.css" rel="stylesheet" type="text/css" />
+    <script src="https://unpkg.com/@replit/extensions@0.24.0/dist/index.global.js"></script>
+    <script>
+        const setTheme = async () => {
+            const currentTheme = await replit.theme.getCurrentTheme()
+            
+            for (const value in currentTheme.values.global) {
+                if (!value.startsWith('_')) {
+                    const cssVariableName = '--' + value.replace(/[A-Z]/g, letter => `-${letter.toLowerCase()}`)
+                    document.documentElement.style.setProperty(cssVariableName, currentTheme.values.global[value])
+                }
+            }
+        }
+    
+        setTheme()
+    </script>
+</head>
+<body>
+    <div id="app">
+        <section id="loading-page" class="active-section"> 
+            Loading...
+        </section>
+        <section id="external-page">
+            <p>This is an extension!</p>
+        </section>
+        <section id="import-export-selection">
+            <a href="#import-page">Import</a>
+            <a href="#export-page">Export</a>
+        </section>
+        <section id="import-page">
+            <header>
+                <a href="#import-export-selection">Back</a>
+            </header>
+            <ul id="importable-files-list">
+                <li>Loading files...</li>
+            </ul>
+            <div id="import-progress-info" hidden=true>
+                <p class="status-message"></p>
+                <progress max="100" value="0"></progress>
+            </div>
+        </section>
+        <section id="export-page">
+            <header>
+                <a href="#import-export-selection">Back</a>
+            </header>
+            <form id="export-form">
+                <input type="text" id="file-name" placeholder="Filename" required>
+                <select id="file-type">
+                    <option value="json">.json</option>
+                    <option value="yaml" disabled>.yaml</option>
+                    <option value="xml" disabled>.xml</option>
+                </select>
+                <button id="export-button">Export</button>
+                <br>
+                <input type="checkbox" id="beautify-output-checkbox">
+                <label for="beautify-output-checkbox">Beautify Output</label>
+            </form>
+            <div id="export-progress-info" hidden=true>
+                <p class="status-message"></p>
+                <progress max="100" value="0"></progress>
+            </div>
+        </section>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
